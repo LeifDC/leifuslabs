@@ -39,7 +39,7 @@ function lookupConstituent(indexSymbol, constituentSymbol, resolve) {
             'companySymbol': constituentSymbol
         }],
         'pagesize': 3,
-        'includelatestnews': false
+        'includelatestnews': true
     });
 
     var post_options = {
