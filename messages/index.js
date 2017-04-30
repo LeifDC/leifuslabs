@@ -1,6 +1,6 @@
-"use strict";
-var builder = require("botbuilder");
-var botbuilder_azure = require("botbuilder-azure");
+'use strict';
+var builder = require('botbuilder');
+var botbuilder_azure = require('botbuilder-azure');
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
@@ -36,38 +36,30 @@ if (useEmulator) {
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 bot.recognizer(recognizer);
 
-
-bot.dialog('LookupUrl', [
-    function (session, args, next) {
-        session.sendTyping();
-        
-        var url = builder.EntityRecognizer.findEntity(args.intent.entities, 'builtin.url');
-        if (url) {
-            session.dialogData.url = 'url';
-            next({ response: url.entity });
-        } else {
-            // no entities detected, ask user for a destination
-            builder.Prompts.text(session, 'Please provide a url');
+bot.dialog('LookupUrl', require('./actions/lookupUrl'))
+    .triggerAction({
+        matches: 'LookupUrl',
+        onInterrupted: function (session) {
+            session.endDialog('Um. LookupUrl Interrupted.');
         }
-    },
-    function (session, results) {
-        var url = results.response;
-        
-        Store.lookupUrl(url)
-            .then(function (data) {
-                session.send('Here\'s what I\'ve found for ' + url + ':');
-		        session.endDialog(data.join('\n'));
-            });
-    }
-]).triggerAction({
-    matches: 'LookupUrl',
-    onInterrupted: function (session) {
-        session.send('Um. Please provide a url');
-    }
-});
+    });
+
+bot.dialog('LookupConstituent', require('./actions/lookupConstituent'))
+    .triggerAction({
+        matches: 'LookupConstituent',
+        onInterrupted: function (session) {
+            session.endDialog('Um. LookupConstituent Interrupted.');
+        }
+    });
 
 bot.dialog('Help', function (session) {
-    session.endDialog('Hi! Try asking things like \'lookup [url]\' or \'What do we have for [ur]\'.');
+    session.endDialog('Hi! Try asking me to lookup a url.');
 }).triggerAction({
     matches: 'Help'
+});
+
+bot.dialog('/', function (session) {
+    session.endDialog('Sorry, I don\'t understand. Try asking me to lookup a url.');
+}).triggerAction({
+    matches: '/'
 });
