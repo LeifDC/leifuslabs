@@ -21,9 +21,19 @@ module.exports = [
         var idxSymbol = results.indexSymbol;
         var constituentSymbol = results.constituentSymbol;
 
-        lookupConstituent(idxSymbol, constituentSymbol, function(response) {
-            session.endDialog(response);
-        });
+        //lookupConstituent(idxSymbol, constituentSymbol, function(response) {
+            var msg = new builder.Message(session).sourceEvent({
+                slack: {
+                    text:'hello',
+                    attachments: [{
+                        text: 'attachText',
+                        pretext: 'PRE attachText',
+                        color: '#00ff44'
+                    }]
+                }
+            });
+            session.endDialog(msg);
+        //});
     }
 ];
 
@@ -117,8 +127,8 @@ function lookupConstituent(indexSymbol, constituentSymbol, resolve) {
                         };
 
                         var channelData = {
-                            'text': 'Here\'s what I found: *' + companySymbol + ' - ' + index + ' (' + currency + ')*',
-                            'attachments': [{
+                            text: 'Here\'s what I found: *' + companySymbol + ' - ' + index + ' (' + currency + ')*',
+                            attachments: [{
                                 'fallback': companySymbol + ' - ' + index + ' (' + currency + ')',
                                 'color': "#36a64f",
                                 //"pretext": "",
