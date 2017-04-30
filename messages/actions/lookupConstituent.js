@@ -21,19 +21,12 @@ module.exports = [
         var idxSymbol = results.indexSymbol;
         var constituentSymbol = results.constituentSymbol;
 
-        //lookupConstituent(idxSymbol, constituentSymbol, function(response) {
+        lookupConstituent(idxSymbol, constituentSymbol, function(response) {
             var msg = new builder.Message(session).sourceEvent({
-                slack: {
-                    text:'hello',
-                    attachments: [{
-                        text: 'attachText',
-                        pretext: 'PRE attachText',
-                        color: '#00ff44'
-                    }]
-                }
+                slack: response
             });
             session.endDialog(msg);
-        //});
+        });
     }
 ];
 
@@ -127,7 +120,7 @@ function lookupConstituent(indexSymbol, constituentSymbol, resolve) {
                         };
 
                         var channelData = {
-                            text: 'Here\'s what I found: *' + companySymbol + ' - ' + index + ' (' + currency + ')*',
+                            text: 'Here\'s what I found.',
                             attachments: [{
                                 'fallback': companySymbol + ' - ' + index + ' (' + currency + ')',
                                 'color': "#36a64f",
@@ -136,43 +129,43 @@ function lookupConstituent(indexSymbol, constituentSymbol, resolve) {
                                 'title': name,
                                 'title_link': 'https://trading.co.uk/#!company/' + indexSymbol + '/' + companySymbol,
                                 'text':'sub text is here...'
-//                                thumb_url: logoUrl
-//                                text: "",
-//                                fields: [
-//                                    {
-//                                        title: "Open | Current | Max Pulse",
-//                                        value: openPulse + ' | ' + pulse + ' | ' + maxPulse,
-//                                        short: true
-//                                    },
-//                                    {
-//                                        title: "Stories/Articles",
-//                                        value: storyCount + '/' + articleCount,
-//                                        short: true
-//                                    },
-//                                    {
-//                                        title: "Mentions",
-//                                        value: mentions,
-//                                        short: true
-//                                    },
-//                                    {
-//                                        title: "Sectors",
-//                                        value: sectors.join(', '),
-//                                        short: true
-//                                    },
-//                                    {
-//                                        title: "Market Indices",
-//                                        value: indices.join(', '),
-//                                        short: false
-//                                    },
-//                                    {
-//                                        title: "News @ " + storyDate + ": " + latestStoryTitle,
-//                                        value: summary,
-//                                        short: false
-//                                    }
-//                                ],
-//                                footer: "Trading API",
-//                                footer_icon: "https://trading.co.uk/img/logo.png",
-//                                ts: Math.floor(new Date() / 1000)
+                                thumb_url: logoUrl
+                                //text: "",
+                                fields: [
+                                    {
+                                        title: "Open | Current | Max Pulse",
+                                        value: openPulse + ' | ' + pulse + ' | ' + maxPulse,
+                                        short: true
+                                    },
+                                    {
+                                        title: "Stories/Articles",
+                                        value: storyCount + '/' + articleCount,
+                                        short: true
+                                    },
+                                    {
+                                        title: "Mentions",
+                                        value: mentions,
+                                        short: true
+                                    },
+                                    {
+                                        title: "Sectors",
+                                        value: sectors.join(', '),
+                                        short: true
+                                    },
+                                    {
+                                        title: "Market Indices",
+                                        value: indices.join(', '),
+                                        short: false
+                                    },
+                                    {
+                                        title: "News @ " + storyDate + ": " + latestStoryTitle,
+                                        value: summary,
+                                        short: false
+                                    }
+                                ],
+                                footer: "Trading API",
+                                footer_icon: "https://trading.co.uk/img/logo.png",
+                                ts: Math.floor(new Date() / 1000)
                             }]
                         };
 
