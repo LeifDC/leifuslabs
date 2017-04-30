@@ -5,15 +5,15 @@ module.exports = [
         session.sendTyping();
         
         var constituentSymbol = builder.EntityRecognizer.findEntity(args.intent.entities, 'constituentSymbol');
-        session.dialogData.constituentSymbol = constituentSymbol;
         if (constituentSymbol) {
-            next();
+            session.dialogData.constituentSymbol = constituentSymbol.entity;
+            next({ response: constituentSymbol.entity});
         } else {
             builder.Prompts.text(session, 'What constituent you want me to lookup?');
         }
     },
-    function (session) {
-        var constituentSymbol = session.dialogData.constituentSymbol;
+    function (session, results) {
+        var constituentSymbol = results.response;
         session.endDialog('Here\'s the constituent for: ' + constituentSymbol + ':');
     }
 ];

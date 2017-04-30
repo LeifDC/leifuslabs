@@ -5,15 +5,15 @@ module.exports = [
         session.sendTyping();
         
         var url = builder.EntityRecognizer.findEntity(args.intent.entities, 'builtin.url');
-        session.dialogData.url = url.entity;
         if (url) {
-            next();
+            session.dialogData.url = url.entity;
+            next({response: url.entity});
         } else {
-            builder.Prompts.text(session, 'What do you want me to lookup?');
+            builder.Prompts.text(session, 'Ok. What url?');
         }
     },
-    function (session) {
-        var url = session.dialogData.url;
+    function (session, results) {
+        var url = results.response;
         //Store
             //.lookupUrl(url)
             //.then(function (data) {
