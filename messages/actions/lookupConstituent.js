@@ -122,14 +122,14 @@ function lookupConstituent(indexSymbol, constituentSymbol, resolve) {
                         var channelData = {
                             text: 'Here\'s what I found.',
                             attachments: [{
-                                'fallback': companySymbol + ' - ' + index + ' (' + currency + ')',
-                                'color': "#36a64f",
+                                fallback: companySymbol + ' - ' + index + ' (' + currency + ')',
+                                color: "#36a64f",
                                 //"pretext": "",
-                                'author_name': companySymbol + ' - ' + index + ' (' + currency + ')',
-                                'title': name,
-                                'title_link': 'https://trading.co.uk/#!company/' + indexSymbol + '/' + companySymbol,
-                                'text':'sub text is here...'
-                                thumb_url: logoUrl
+                                author_name: companySymbol + ' - ' + index + ' (' + currency + ')',
+                                title: name,
+                                title_link: 'https://trading.co.uk/#!company/' + indexSymbol + '/' + companySymbol,
+                                //text':'sub text is here...'
+                                thumb_url: logoUrl,
                                 //text: "",
                                 fields: [
                                     {
