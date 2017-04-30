@@ -4,6 +4,8 @@ var request = require('request');
 module.exports = [
     function (session, args, next) {
         session.sendTyping();
+
+        console.log('chanId', session.message.channelId);
         
         var constituentSymbols = builder.EntityRecognizer.findAllEntities(args.intent.entities, 'constituentSymbol');
         if (constituentSymbols && constituentSymbols.length == 2) {
@@ -22,9 +24,13 @@ module.exports = [
         var constituentSymbol = results.constituentSymbol;
 
         lookupConstituent(idxSymbol, constituentSymbol, function(response) {
-            var msg = new builder.Message(session).sourceEvent({
-                slack: response
-            });
+            var msg = new builder.Message(session);
+
+            if (session.message.address.channelId === 'slack') {
+                msg.sourceEvent({slack: response});
+            } else {
+                msg.text(JSON.stringify(response))
+            }
             session.endDialog(msg);
         });
     }
