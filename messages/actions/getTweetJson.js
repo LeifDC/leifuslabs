@@ -4,7 +4,7 @@ module.exports = [
     function (session, args, next) {
         session.sendTyping();
         
-        var tweetId = builder.EntityRecognizer.findEntity(args.intent.entities, 'tweetId');
+        var tweetId = builder.EntityRecognizer.findEntity(args.intent.entities, 'builtin.number');
         if (tweetId) {
             session.dialogData.tweetId = tweetId.entity;
             next({response: tweetId.entity});
