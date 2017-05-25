@@ -36,7 +36,7 @@ module.exports = [
             if (!error) {
                 var tweetStr = '```' + JSON.stringify(tweets) + '```';
                 var channelData = {
-                    text: 'Here\'s the JSON for `' + tweetId + '`: ```',
+                    text: 'Here\'s the JSON for ' + tweetId,
                     attachments: [{
                         fallback: tweetStr,
                         color: "#CCC",
@@ -55,9 +55,7 @@ module.exports = [
                 } else {
                     msg.text(JSON.stringify(channelData))
                 }
-                session.endDialog(msg);
-                
-                session.endDialog('Here\'s the JSON for `' + tweetId + '`: ```' + JSON.stringify(tweets) + '```');
+                session.endDialog(msg);                
             }
             else {
                 console.log("error...", error);
