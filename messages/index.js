@@ -61,7 +61,7 @@ bot.dialog('GetTweetJson', require('./actions/getTweetJson'))
     });
 
 bot.dialog('Help', function (session) {
-    session.endDialog('Hi! Try asking me to lookup a url.');
+    session.endDialog('Hi! Try asking me to lookup a company, like `lookup nas aapl` or ask me to `get tweet json`.');
 }).triggerAction({
     matches: 'Help'
 });
