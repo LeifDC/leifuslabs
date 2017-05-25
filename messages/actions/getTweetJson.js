@@ -32,10 +32,9 @@ module.exports = [
             include_entities: true
         };
 
-        twit.get('statuses/show', params, function(error, tweets, response) {
+        twit.get('statuses/show', params, function(error, tweet, response) {
             if (!error) {
-                var tweetStr = JSON.stringify(tweets);
-                var tweet = JSON.parse(tweets);
+                var tweetStr = JSON.stringify(tweet);
                 var user = tweet.user.screen_name;
                 var channelData = {
                     text: 'Here\'s the JSON for ' + tweetId,
