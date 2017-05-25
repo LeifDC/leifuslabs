@@ -37,22 +37,14 @@ module.exports = [
                 var tweetStr = JSON.stringify(tweet);
                 var user = tweet.user.screen_name;
                 var channelData = {
-                    text: 'Here\'s the JSON for ' + tweetId,
+                    text: 'https://twitter.com/' + user + '/status/' + tweetId,
                     attachments: [{
-                        fallback: tweetStr,
-                        color: "#CCC",
-                        title: 'View tweet',
-                        title_link: 'https://twitter.com/' + user + 'status/' + tweetId,
-                        text: tweetStr,
-                        mrkdwn_in: ["text"]
-                    },
-                    {
-                        fallback: '',
-                        color: "#CCC",
-                        title: 'https://twitter.com/' + user + '/status/' + tweetId,
-                        title_link: 'https://twitter.com/' + user + '/status/' + tweetId,
-                        footer: "Twitter API",
-                        footer_icon: "https://twitter.com/favicon.ico"
+                        "fallback": tweetStr,
+                        "color": "#CCC",
+                        "title": 'View tweet',
+                        "title_link": 'https://twitter.com/' + user + '/status/' + tweetId,
+                        "text": "```" + tweetStr + "```",
+                        "mrkdwn_in": ["text"]
                     }]
                 };
 
