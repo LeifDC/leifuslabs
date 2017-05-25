@@ -41,8 +41,6 @@ module.exports = [
                     attachments: [{
                         "fallback": tweetStr,
                         "color": "#CCC",
-                        "title": 'View tweet',
-                        "title_link": 'https://twitter.com/' + user + '/status/' + tweetId,
                         "text": "```" + tweetStr + "```",
                         "mrkdwn_in": ["text"]
                     }]
