@@ -34,7 +34,7 @@ module.exports = [
 
         twit.get('statuses/show', params, function(error, tweets, response) {
             if (!error) {
-                var tweetStr = '```' + JSON.stringify(tweets) + '```';
+                var tweetStr = JSON.stringify(tweets);
                 var tweet = JSON.parse(tweets);
                 var user = tweet.user.screen_name;
                 var channelData = {
@@ -45,10 +45,15 @@ module.exports = [
                         title: 'View tweet',
                         title_link: 'https://twitter.com/' + user + 'status/' + tweetId,
                         text: tweetStr,
-                        mrkdwn_in: ["text"],
+                        mrkdwn_in: ["text"]
+                    },
+                    {
+                        fallback: '',
+                        color: "#CCC",
+                        title: 'https://twitter.com/' + user + '/status/' + tweetId,
+                        title_link: 'https://twitter.com/' + user + '/status/' + tweetId,
                         footer: "Twitter API",
-                        footer_icon: "https://twitter.com/favicon.ico",
-                        ts: Math.floor(new Date() / 1000)
+                        footer_icon: "https://twitter.com/favicon.ico"
                     }]
                 };
 
