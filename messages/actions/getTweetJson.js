@@ -13,6 +13,8 @@ module.exports = [
         }
     },
     function (session, results) {
+        var msg = new builder.Message(session);
+
         var tweetId = results.response;
         var twitter = require('twitter');
 
@@ -32,6 +34,29 @@ module.exports = [
 
         twit.get('statuses/show', params, function(error, tweets, response) {
             if (!error) {
+                var tweetStr = '```' + JSON.stringify(tweets) + '```';
+                var channelData = {
+                    text: 'Here\'s the JSON for `' + tweetId + '`: ```',
+                    attachments: [{
+                        fallback: tweetStr,
+                        color: "#CCC",
+                        title: 'View tweet',
+                        title_link: 'https://twitter.com/status/' + tweetId,
+                        text: tweetStr,
+                        mrkdwn: true,
+                        footer: "Twitter API",
+                        footer_icon: "https://twitter.com/favicon.ico",
+                        ts: Math.floor(new Date() / 1000)
+                    }]
+                };
+
+                if (session.message.address.channelId === 'slack') {
+                    msg.sourceEvent({slack: response});
+                } else {
+                    msg.text(JSON.stringify(response))
+                }
+                session.endDialog(msg);
+                
                 session.endDialog('Here\'s the JSON for `' + tweetId + '`: ```' + JSON.stringify(tweets) + '```');
             }
             else {
