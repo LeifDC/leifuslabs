@@ -242,7 +242,7 @@ function lookupConstituent(indexSymbol, constituentSymbol, resolve) {
                                     //}
                                 ],
                                 //"footer": "Trading API",
-                                //"footer_icon": "https://trading.co.uk/img/logo.png",
+                                //"footer_icon": "https://trading.co.uk/favicon.ico",
                                 //"ts": Math.floor(new Date() / 1000)
                             });
                         });
