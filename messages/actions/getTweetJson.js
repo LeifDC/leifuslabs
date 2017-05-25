@@ -51,9 +51,9 @@ module.exports = [
                 };
 
                 if (session.message.address.channelId === 'slack') {
-                    msg.sourceEvent({slack: response});
+                    msg.sourceEvent({slack: channelData});
                 } else {
-                    msg.text(JSON.stringify(response))
+                    msg.text(JSON.stringify(channelData))
                 }
                 session.endDialog(msg);
                 
