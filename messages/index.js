@@ -52,6 +52,14 @@ bot.dialog('LookupConstituent', require('./actions/lookupConstituent'))
         }
     });
 
+bot.dialog('GetTweetJson', require('./actions/getTweetJson'))
+    .triggerAction({
+        matches: 'GetTweetJson',
+        onInterrupted: function (session) {
+            session.endDialog('Um. GetTweetJson Interrupted.');
+        }
+    });
+
 bot.dialog('Help', function (session) {
     session.endDialog('Hi! Try asking me to lookup a url.');
 }).triggerAction({

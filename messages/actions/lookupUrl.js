@@ -2,6 +2,8 @@ var builder = require('botbuilder');
 
 module.exports = [
     function (session, args, next) {
+        session.endDialog('Sorry. My maker has broken this option: #Todo: Create a url lookup api endpoint.')
+
         session.sendTyping();
         
         var url = builder.EntityRecognizer.findEntity(args.intent.entities, 'builtin.url');
