@@ -67,7 +67,7 @@ bot.dialog('Help', function (session) {
 });
 
 bot.dialog('/', function (session) {
-    session.endDialog('Sorry, I don\'t understand. Try asking me to lookup a url.');
+    session.endDialog('Sorry, I don\'t understand. Type help to see what I do understand.');
 }).triggerAction({
     matches: '/'
 });
